@@ -126,4 +126,51 @@ class SinglyLinkedListTest {
         assertNotEquals(this.list, copy);
         assertEquals(2, copy.size());
     }
+
+    @Test
+    @DisplayName("Iterator should traverse elements in the correct insertion order")
+    void testIterator() {
+        this.list.addLast(10);
+        this.list.addLast(20);
+        this.list.addLast(30);
+
+        java.util.Iterator<Integer> it = this.list.iterator();
+
+        assertTrue(it.hasNext());
+        assertEquals(10, it.next());
+
+        assertTrue(it.hasNext());
+        assertEquals(20, it.next());
+
+        assertTrue(it.hasNext());
+        assertEquals(30, it.next());
+
+        assertFalse(it.hasNext());
+    }
+
+    @Test
+    @DisplayName("Iterator should throw NoSuchElementException when exhausted")
+    void testIteratorException() {
+        this.list.addFirst(1);
+        java.util.Iterator<Integer> it = this.list.iterator();
+
+        it.next(); // Consume only element
+
+        assertFalse(it.hasNext());
+        assertThrows(java.util.NoSuchElementException.class, it::next);
+    }
+
+    @Test
+    @DisplayName("toString should produce the correct visual representation")
+    void testToString() {
+        // Test empty
+        assertEquals("", this.list.toString(), "Empty list should return empty string");
+
+        // Test populated
+        this.list.addLast(1);
+        this.list.addLast(2);
+        this.list.addLast(3);
+
+        assertEquals("1 -> 2 -> 3", this.list.toString());
+    }
 }

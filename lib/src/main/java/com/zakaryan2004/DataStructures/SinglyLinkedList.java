@@ -36,7 +36,8 @@ import java.util.NoSuchElementException;
  * have a higher time complexity.
  *
  * <p>
- * For that reason, it doesn't implement the List interface.
+ * For that reason, it doesn't fully implement the List interface and omits
+ * methods like {@code get}, {@code put}, {@code remove} and so on.
  *
  * @param <E> The type of the elements in this collection
  */
@@ -73,7 +74,9 @@ public class SinglyLinkedList<E> implements Collection<E> {
         /**
          * {@return the following node (or null if this is the last node}
          */
-        public Node<E> getNext() { return this.next; }
+        public Node<E> getNext() {
+            return this.next;
+        }
 
         /**
          * Sets the node's next reference to point to Node {@code node}
